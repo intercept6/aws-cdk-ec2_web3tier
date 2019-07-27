@@ -2,16 +2,16 @@ import { Construct, Stack, StackProps, Tag } from "@aws-cdk/core";
 import { Port, SecurityGroup, SubnetType, Vpc } from "@aws-cdk/aws-ec2";
 
 export class NetworkStack extends Stack {
-    public readonly vpc: Vpc;
-    public readonly appSg: SecurityGroup;
-    public readonly dbSg: SecurityGroup;
+  public readonly vpc: Vpc;
+  public readonly appSg: SecurityGroup;
+  public readonly dbSg: SecurityGroup;
 
-    constructor(scope: Construct, id: string, props?: StackProps) {
-        super(scope, id, props);
+  constructor(scope: Construct, id: string, props?: StackProps) {
+    super(scope, id, props);
 
-        const prj: string = this.node.tryGetContext("prj");
-        const stage: string = this.node.tryGetContext("stage");
-        const params: any = this.node.tryGetContext(stage);
+    const prj: string = this.node.tryGetContext("prj");
+    const stage: string = this.node.tryGetContext("stage");
+    const params: any = this.node.tryGetContext(stage);
 
     this.vpc = new Vpc(this, "VPC", {
       enableDnsHostnames: true,
