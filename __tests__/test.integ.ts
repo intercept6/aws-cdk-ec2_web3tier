@@ -1,9 +1,9 @@
-import {App} from "@aws-cdk/core";
-import {SynthUtils} from "@aws-cdk/assert";
-import {IdentityStack} from "../lib/identity-stack";
-import {NetworkStack} from "../lib/network-stack";
-import {ComputeStack} from "../lib/compute-stack";
-import {DataStoreStack} from "../lib/datastore-stack";
+import { App } from "@aws-cdk/core";
+import { SynthUtils } from "@aws-cdk/assert";
+import { IdentityStack } from "../lib/identity-stack";
+import { NetworkStack } from "../lib/network-stack";
+import { ComputeStack } from "../lib/compute-stack";
+import { DataStoreStack } from "../lib/datastore-stack";
 
 describe("integ", () => {
     test("default", () => {

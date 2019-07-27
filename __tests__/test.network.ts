@@ -1,6 +1,6 @@
-import {App} from "@aws-cdk/core";
-import {SynthUtils} from "@aws-cdk/assert";
-import {NetworkStack} from "../lib/network-stack";
+import { App } from "@aws-cdk/core";
+import { SynthUtils } from "@aws-cdk/assert";
+import { NetworkStack } from "../lib/network-stack";
 
 describe("network", () => {
   test("default", () => {
