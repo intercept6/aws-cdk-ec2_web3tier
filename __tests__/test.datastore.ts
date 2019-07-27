@@ -1,6 +1,6 @@
-import {App, Stack} from "@aws-cdk/core"
-import {SynthUtils} from "@aws-cdk/assert"
-import {DataStoreStack} from '../lib/datastore-stack'
+import {App, Stack} from "@aws-cdk/core";
+import {SynthUtils} from "@aws-cdk/assert";
+import {DataStoreStack} from "../lib/datastore-stack";
 import {SecurityGroup, SubnetType, Vpc} from "@aws-cdk/aws-ec2";
 
 describe("datastore", () => {
@@ -9,21 +9,21 @@ describe("datastore", () => {
         app.node.setContext("prj", "ssprj");
         app.node.setContext("stage", "ssstage");
         app.node.setContext("ssstage", {
-            "nat_gateways": 1
+            nat_gateways: 1
         });
-        const givenStack = new Stack(app, 'GivenStack');
-        const vpc = new Vpc(givenStack, 'TestVPC', {
+        const givenStack = new Stack(app, "GivenStack");
+        const vpc = new Vpc(givenStack, "TestVPC", {
             subnetConfiguration: [
-                {name: 'Isolated', subnetType: SubnetType.ISOLATED},
+                {name: "Isolated", subnetType: SubnetType.ISOLATED}
             ]
         });
-        const sg = new SecurityGroup(givenStack, 'TestSecurityGroup', {
-            vpc: vpc,
+        const sg = new SecurityGroup(givenStack, "TestSecurityGroup", {
+            vpc: vpc
         });
-        const stack = new DataStoreStack(app, 'TestDataStoreStack', {
+        const stack = new DataStoreStack(app, "TestDataStoreStack", {
             vpc: vpc,
             dbSg: sg
         });
-        expect(SynthUtils.toCloudFormation(stack)).toMatchSnapshot()
-    })
+        expect(SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
+    });
 });

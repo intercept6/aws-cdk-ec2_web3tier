@@ -14,23 +14,26 @@ export class DataStoreStack extends Stack {
     constructor(scope: Construct, id: string, props: DataStoreStackProps) {
         super(scope, id, props);
 
-        const prj: string = this.node.tryGetContext('prj');
-        const stage: string = this.node.tryGetContext('stage');
+        const prj: string = this.node.tryGetContext("prj");
+        const stage: string = this.node.tryGetContext("stage");
         // const params: any = this.node.tryGetContext(stage);
 
-        const cluster = new DatabaseCluster(this, 'DBCluster', {
+        const cluster = new DatabaseCluster(this, "DBCluster", {
             engine: DatabaseClusterEngine.AURORA,
             masterUser: {
-                username: 'admin',
+                username: "admin"
             },
             removalPolicy: RemovalPolicy.DESTROY,
             instanceProps: {
-                instanceType: InstanceType.of(InstanceClass.MEMORY5, InstanceSize.LARGE),
+                instanceType: InstanceType.of(
+                    InstanceClass.MEMORY5,
+                    InstanceSize.LARGE
+                ),
                 vpcSubnets: {
-                    subnetType: SubnetType.ISOLATED,
+                    subnetType: SubnetType.ISOLATED
                 },
                 vpc: props.vpc,
-                securityGroup: props.dbSg,
+                securityGroup: props.dbSg
             }
         });
         cluster.node.applyAspect(new Tag("Name", `${prj}-${stage}-db`));
