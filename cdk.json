@@ -1,0 +1,15 @@
+{
+  "context": {
+    "prj": "web-3tier",
+    "dev": {
+      "nat_gateways": 1
+    },
+    "stg": {
+      "nat_gateways": 2
+    },
+    "prd": {
+      "nat_gateways": 2
+    }
+  },
+  "app": "npx ts-node bin/web-3tier.ts"
+}

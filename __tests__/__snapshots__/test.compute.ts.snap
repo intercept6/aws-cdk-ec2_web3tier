@@ -1,0 +1,228 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`compute default 1`] = `
+Object {
+  "Parameters": Object {
+    "SsmParameterValueawsserviceamiamazonlinuxlatestamznamihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter": Object {
+      "Default": "/aws/service/ami-amazon-linux-latest/amzn-ami-hvm-x86_64-gp2",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": Object {
+    "ASG46ED3070": Object {
+      "Properties": Object {
+        "DesiredCapacity": "1",
+        "LaunchConfigurationName": Object {
+          "Ref": "ASGLaunchConfigC00AF12B",
+        },
+        "MaxSize": "1",
+        "MinSize": "1",
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "PropagateAtLaunch": true,
+            "Value": "TestComputeStack/ASG",
+          },
+        ],
+        "TargetGroupARNs": Array [
+          Object {
+            "Ref": "AlbListenerTargetGroup34CD4313",
+          },
+        ],
+        "VPCZoneIdentifier": Array [
+          Object {
+            "Fn::ImportValue": "GivenStack:ExportsOutputRefTestVPCPrivateSubnet1Subnet005D5ABE0341BEED",
+          },
+          Object {
+            "Fn::ImportValue": "GivenStack:ExportsOutputRefTestVPCPrivateSubnet2Subnet45EC7DE34DC431C1",
+          },
+        ],
+      },
+      "Type": "AWS::AutoScaling::AutoScalingGroup",
+      "UpdatePolicy": Object {
+        "AutoScalingScheduledAction": Object {
+          "IgnoreUnmodifiedGroupSizeProperties": true,
+        },
+      },
+    },
+    "ASGInstanceProfile0A2834D7": Object {
+      "Properties": Object {
+        "Roles": Array [
+          Object {
+            "Fn::ImportValue": "GivenStack:ExportsOutputRefTestRole6C9272DF9DD89F08",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::InstanceProfile",
+    },
+    "ASGInstanceSecurityGroup0525485D": Object {
+      "Properties": Object {
+        "GroupDescription": "TestComputeStack/ASG/InstanceSecurityGroup",
+        "SecurityGroupEgress": Array [
+          Object {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
+          },
+        ],
+        "SecurityGroupIngress": Array [],
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "TestComputeStack/ASG",
+          },
+        ],
+        "VpcId": Object {
+          "Fn::ImportValue": "GivenStack:ExportsOutputRefTestVPCD26570D8E54DE509",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "ASGInstanceSecurityGroupfromTestComputeStackAlbSecurityGroupCE0D67B380F4465ED4": Object {
+      "Properties": Object {
+        "Description": "Load balancer to target",
+        "FromPort": 80,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "ASGInstanceSecurityGroup0525485D",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "AlbSecurityGroup580F65A6",
+            "GroupId",
+          ],
+        },
+        "ToPort": 80,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "ASGLaunchConfigC00AF12B": Object {
+      "Properties": Object {
+        "IamInstanceProfile": Object {
+          "Ref": "ASGInstanceProfile0A2834D7",
+        },
+        "ImageId": Object {
+          "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamznamihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter",
+        },
+        "InstanceType": "t2.micro",
+        "SecurityGroups": Array [
+          Object {
+            "Fn::GetAtt": Array [
+              "ASGInstanceSecurityGroup0525485D",
+              "GroupId",
+            ],
+          },
+        ],
+        "UserData": Object {
+          "Fn::Base64": "#!/bin/bash
+yum -y update
+yum -y install nginx
+systemctl enable nginx
+systemctl start nginx",
+        },
+      },
+      "Type": "AWS::AutoScaling::LaunchConfiguration",
+    },
+    "Alb16C2F182": Object {
+      "Properties": Object {
+        "LoadBalancerAttributes": Array [],
+        "Name": "ssprj-ssstage-alb",
+        "Scheme": "internet-facing",
+        "SecurityGroups": Array [
+          Object {
+            "Fn::GetAtt": Array [
+              "AlbSecurityGroup580F65A6",
+              "GroupId",
+            ],
+          },
+        ],
+        "Subnets": Array [
+          Object {
+            "Fn::ImportValue": "GivenStack:ExportsOutputRefTestVPCPublicSubnet1SubnetAE333572D53FE905",
+          },
+          Object {
+            "Fn::ImportValue": "GivenStack:ExportsOutputRefTestVPCPublicSubnet2SubnetF2FC694369D844D7",
+          },
+        ],
+        "Type": "application",
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+    },
+    "AlbListener86261768": Object {
+      "Properties": Object {
+        "Certificates": Array [],
+        "DefaultActions": Array [
+          Object {
+            "TargetGroupArn": Object {
+              "Ref": "AlbListenerTargetGroup34CD4313",
+            },
+            "Type": "forward",
+          },
+        ],
+        "LoadBalancerArn": Object {
+          "Ref": "Alb16C2F182",
+        },
+        "Port": 80,
+        "Protocol": "HTTP",
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::Listener",
+    },
+    "AlbListenerTargetGroup34CD4313": Object {
+      "Properties": Object {
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": Array [],
+        "TargetType": "instance",
+        "Targets": Array [],
+        "VpcId": Object {
+          "Fn::ImportValue": "GivenStack:ExportsOutputRefTestVPCD26570D8E54DE509",
+        },
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+    },
+    "AlbSecurityGroup580F65A6": Object {
+      "Properties": Object {
+        "GroupDescription": "Automatically created Security Group for ELB TestComputeStackAlb356BBA99",
+        "SecurityGroupEgress": Array [],
+        "SecurityGroupIngress": Array [
+          Object {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow from anyone on port 80",
+            "FromPort": 80,
+            "IpProtocol": "tcp",
+            "ToPort": 80,
+          },
+        ],
+        "VpcId": Object {
+          "Fn::ImportValue": "GivenStack:ExportsOutputRefTestVPCD26570D8E54DE509",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "AlbSecurityGrouptoTestComputeStackASGInstanceSecurityGroupAA82C57980B75EECA4": Object {
+      "Properties": Object {
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "ASGInstanceSecurityGroup0525485D",
+            "GroupId",
+          ],
+        },
+        "FromPort": 80,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "AlbSecurityGroup580F65A6",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 80,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+  },
+}
+`;

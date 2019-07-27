@@ -1,0 +1,147 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`datastore default 1`] = `
+Object {
+  "Resources": Object {
+    "DBCluster15AF587F": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "DBSubnetGroupName": Object {
+          "Ref": "DBClusterSubnets1338ED0E",
+        },
+        "Engine": "aurora",
+        "MasterUserPassword": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "{{resolve:secretsmanager:",
+              Object {
+                "Ref": "DBClusterSecretCDFF091A",
+              },
+              ":SecretString:password::}}",
+            ],
+          ],
+        },
+        "MasterUsername": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "{{resolve:secretsmanager:",
+              Object {
+                "Ref": "DBClusterSecretCDFF091A",
+              },
+              ":SecretString:username::}}",
+            ],
+          ],
+        },
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "ssprj-ssstage-db",
+          },
+        ],
+        "VpcSecurityGroupIds": Array [
+          Object {
+            "Fn::ImportValue": "GivenStack:ExportsOutputFnGetAttTestSecurityGroup880B57C0GroupIdE8B1161D",
+          },
+        ],
+      },
+      "Type": "AWS::RDS::DBCluster",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "DBClusterInstance160268105": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "DBClusterIdentifier": Object {
+          "Ref": "DBCluster15AF587F",
+        },
+        "DBInstanceClass": "db.r5.large",
+        "DBSubnetGroupName": Object {
+          "Ref": "DBClusterSubnets1338ED0E",
+        },
+        "Engine": "aurora",
+        "PubliclyAccessible": false,
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "ssprj-ssstage-db",
+          },
+        ],
+      },
+      "Type": "AWS::RDS::DBInstance",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "DBClusterInstance2E3B28A27": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "DBClusterIdentifier": Object {
+          "Ref": "DBCluster15AF587F",
+        },
+        "DBInstanceClass": "db.r5.large",
+        "DBSubnetGroupName": Object {
+          "Ref": "DBClusterSubnets1338ED0E",
+        },
+        "Engine": "aurora",
+        "PubliclyAccessible": false,
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "ssprj-ssstage-db",
+          },
+        ],
+      },
+      "Type": "AWS::RDS::DBInstance",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "DBClusterSecretAttachedSecret7283BE31": Object {
+      "Properties": Object {
+        "SecretId": Object {
+          "Ref": "DBClusterSecretCDFF091A",
+        },
+        "TargetId": Object {
+          "Ref": "DBCluster15AF587F",
+        },
+        "TargetType": "AWS::RDS::DBCluster",
+      },
+      "Type": "AWS::SecretsManager::SecretTargetAttachment",
+    },
+    "DBClusterSecretCDFF091A": Object {
+      "Properties": Object {
+        "GenerateSecretString": Object {
+          "ExcludeCharacters": "\\"@/\\\\",
+          "GenerateStringKey": "password",
+          "PasswordLength": 30,
+          "SecretStringTemplate": "{\\"username\\":\\"admin\\"}",
+        },
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "ssprj-ssstage-db",
+          },
+        ],
+      },
+      "Type": "AWS::SecretsManager::Secret",
+    },
+    "DBClusterSubnets1338ED0E": Object {
+      "Properties": Object {
+        "DBSubnetGroupDescription": "Subnets for DBCluster database",
+        "SubnetIds": Array [
+          Object {
+            "Fn::ImportValue": "GivenStack:ExportsOutputRefTestVPCIsolatedSubnet1SubnetB4ED5A5C1971312B",
+          },
+          Object {
+            "Fn::ImportValue": "GivenStack:ExportsOutputRefTestVPCIsolatedSubnet2Subnet84140C2BE236F491",
+          },
+        ],
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "ssprj-ssstage-db",
+          },
+        ],
+      },
+      "Type": "AWS::RDS::DBSubnetGroup",
+    },
+  },
+}
+`;
