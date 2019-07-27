@@ -1,3 +1,7 @@
+# Status
+
+[![CircleCI](https://circleci.com/gh/kmd2kmd/aws-cdk-ec2_web3tier/tree/master.svg?style=svg)](https://circleci.com/gh/kmd2kmd/aws-cdk-ec2_web3tier/tree/master)
+
 # Useful commands
 
  * `npm run build`  TypeScriptをコンパイルする
