@@ -20,7 +20,7 @@ commands:
             - ~/workspace/node_modules
 
 jobs:
-  setup:
+  test:
     executor:
       name: default
     steps:
@@ -30,45 +30,17 @@ jobs:
           name: Install dependencies
           command: npm install
       - save_npm
-  build:
-    executor:
-      name: default
-    steps:
-      - checkout
-      - restore_npm
       - run:
           name: Run build
           command: npm run build
-  test:
-    executor:
-      name: default
-    steps:
-      - checkout
-      - restore_npm
       - run:
           name: Run test
           command: npm run test
 
 workflows:
-  test_and_deploy:
+  test:
     jobs:
-      - setup:
-          filters:
-            branches:
-              only: /.*/
-            tags:
-              only: /.*/
-      - build:
-          requires:
-            - setup
-          filters:
-            branches:
-              only: /.*/
-            tags:
-              only: /.*/
       - test:
-          requires:
-            - build
           filters:
             branches:
               only: /.*/

@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 import "source-map-support/register";
-import {NetworkStack} from "../lib/network-stack";
-import {ComputeStack} from "../lib/compute-stack";
-import {IdentityStack} from "../lib/identity-stack";
-import {DataStoreStack} from "../lib/datastore-stack";
-import {App} from "@aws-cdk/core";
+import { NetworkStack } from "../lib/network-stack";
+import { ComputeStack } from "../lib/compute-stack";
+import { IdentityStack } from "../lib/identity-stack";
+import { DataStoreStack } from "../lib/datastore-stack";
+import { App } from "@aws-cdk/core";
 
 const app = new App();
 
