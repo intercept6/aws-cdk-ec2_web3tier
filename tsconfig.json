@@ -2,11 +2,7 @@
   "compilerOptions": {
     "target": "ES2018",
     "module": "commonjs",
-    "lib": [
-      "es2016",
-      "es2017.object",
-      "es2017.string"
-    ],
+    "lib": ["es2016", "es2017.object", "es2017.string"],
     "declaration": true,
     "strict": true,
     "noImplicitAny": true,
@@ -22,8 +18,5 @@
     "experimentalDecorators": true,
     "strictPropertyInitialization": false
   },
-  "exclude": [
-    "cdk.out",
-    "__tests__"
-  ]
+  "exclude": ["cdk.out", "__tests__"]
 }

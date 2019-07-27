@@ -1,5 +1,5 @@
 import cdk = require("@aws-cdk/core");
-import {AutoScalingGroup} from "@aws-cdk/aws-autoscaling";
+import { AutoScalingGroup } from "@aws-cdk/aws-autoscaling";
 import {
   AmazonLinuxImage,
   InstanceClass,
@@ -9,8 +9,8 @@ import {
   IVpc,
   SubnetType
 } from "@aws-cdk/aws-ec2";
-import {ApplicationLoadBalancer} from "@aws-cdk/aws-elasticloadbalancingv2";
-import {Role} from "@aws-cdk/aws-iam";
+import { ApplicationLoadBalancer } from "@aws-cdk/aws-elasticloadbalancingv2";
+import { Role } from "@aws-cdk/aws-iam";
 
 interface ComputeStackProps extends cdk.StackProps {
   vpc: IVpc;
@@ -29,23 +29,23 @@ export class ComputeStack extends cdk.Stack {
     const asg = new AutoScalingGroup(this, "ASG", {
       vpc: props.vpc,
       instanceType: InstanceType.of(
-          InstanceClass.BURSTABLE2,
-          InstanceSize.MICRO
+        InstanceClass.BURSTABLE2,
+        InstanceSize.MICRO
       ),
       machineImage: new AmazonLinuxImage(),
       allowAllOutbound: true,
       role: props.instanceRole
     });
     asg.addUserData(
-        "yum -y update",
-        "yum -y install nginx",
-        "systemctl enable nginx",
-        "systemctl start nginx"
+      "yum -y update",
+      "yum -y install nginx",
+      "systemctl enable nginx",
+      "systemctl start nginx"
     );
 
     const alb = new ApplicationLoadBalancer(this, "Alb", {
       vpc: props.vpc,
-      vpcSubnets: {subnetType: SubnetType.PUBLIC},
+      vpcSubnets: { subnetType: SubnetType.PUBLIC },
       internetFacing: true,
       loadBalancerName: `${prj}-${stage}-alb`
     });
