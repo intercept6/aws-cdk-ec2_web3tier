@@ -7,3 +7,4 @@ node_modules
 cdk.out
 .idea/*
 process.yml
+!.eslintrc.js
