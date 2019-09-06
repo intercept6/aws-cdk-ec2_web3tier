@@ -142,7 +142,6 @@ Object {
             "IpProtocol": "-1",
           },
         ],
-        "SecurityGroupIngress": Array [],
         "Tags": Array [
           Object {
             "Key": "Name",
@@ -187,7 +186,6 @@ Object {
             "IpProtocol": "-1",
           },
         ],
-        "SecurityGroupIngress": Array [],
         "Tags": Array [
           Object {
             "Key": "Name",
@@ -749,7 +747,6 @@ Object {
             "IpProtocol": "-1",
           },
         ],
-        "SecurityGroupIngress": Array [],
         "Tags": Array [
           Object {
             "Key": "Name",
@@ -812,7 +809,6 @@ systemctl start nginx",
     },
     "Alb16C2F182": Object {
       "Properties": Object {
-        "LoadBalancerAttributes": Array [],
         "Name": "ssprj-ssstage-alb",
         "Scheme": "internet-facing",
         "SecurityGroups": Array [
@@ -837,7 +833,6 @@ systemctl start nginx",
     },
     "AlbListener86261768": Object {
       "Properties": Object {
-        "Certificates": Array [],
         "DefaultActions": Array [
           Object {
             "TargetGroupArn": Object {
@@ -858,9 +853,7 @@ systemctl start nginx",
       "Properties": Object {
         "Port": 80,
         "Protocol": "HTTP",
-        "TargetGroupAttributes": Array [],
         "TargetType": "instance",
-        "Targets": Array [],
         "VpcId": Object {
           "Fn::ImportValue": "NetworkStack:ExportsOutputRefVPCB9E5F0B4BD23A326",
         },
@@ -870,7 +863,6 @@ systemctl start nginx",
     "AlbSecurityGroup580F65A6": Object {
       "Properties": Object {
         "GroupDescription": "Automatically created Security Group for ELB ComputeStackAlb3324DF6D",
-        "SecurityGroupEgress": Array [],
         "SecurityGroupIngress": Array [
           Object {
             "CidrIp": "0.0.0.0/0",

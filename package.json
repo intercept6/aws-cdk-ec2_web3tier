@@ -12,32 +12,31 @@
   },
   "pre-commit": [
     "build",
-    "test",
-    "lint"
+    "test"
   ],
   "devDependencies": {
-    "@aws-cdk/assert": "1.4.0",
+    "@aws-cdk/assert": "1.7.0",
     "@types/jest": "24.0.18",
     "@types/node": "8.10.51",
-    "@typescript-eslint/eslint-plugin": "2.1.0",
-    "@typescript-eslint/parser": "2.1.0",
-    "eslint": "6.3.0",
-    "eslint-config-prettier": "6.2.0",
+    "@typescript-eslint/eslint-plugin": "2.0.0",
+    "@typescript-eslint/parser": "2.0.0",
+    "eslint": "6.2.2",
+    "eslint-config-prettier": "6.1.0",
     "eslint-plugin-prettier": "3.1.0",
     "pre-commit": "1.2.2",
     "prettier": "1.18.2",
     "ts-jest": "24.0.2",
-    "ts-node": "8.3.0",
-    "typescript": "3.6.2"
+    "ts-node": "8.3.0"
   },
   "dependencies": {
-    "@aws-cdk/aws-autoscaling": "1.4.0",
-    "@aws-cdk/aws-ec2": "1.4.0",
-    "@aws-cdk/aws-elasticloadbalancingv2": "1.4.0",
-    "@aws-cdk/aws-rds": "1.4.0",
-    "@aws-cdk/core": "1.4.0",
-    "aws-cdk": "1.4.0",
-    "source-map-support": "0.5.13"
+    "@aws-cdk/aws-autoscaling": "1.7.0",
+    "@aws-cdk/aws-ec2": "1.7.0",
+    "@aws-cdk/aws-elasticloadbalancingv2": "1.7.0",
+    "@aws-cdk/aws-rds": "1.7.0",
+    "@aws-cdk/core": "1.7.0",
+    "aws-cdk": "1.7.0",
+    "source-map-support": "0.5.13",
+    "typescript": "^3.5.3"
   },
   "jest": {
     "moduleFileExtensions": [
