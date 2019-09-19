@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "lint": "eslint --fix \"./**/*.{ts,json}\"",
+    "lint": "eslint --fix \"./**/*[^d].ts\"",
     "test": "jest"
   },
   "pre-commit": [
@@ -35,6 +35,7 @@
     "@aws-cdk/aws-rds": "1.8.0",
     "@aws-cdk/core": "1.8.0",
     "aws-cdk": "1.8.0",
+    "npm": "6.11.3",
     "source-map-support": "0.5.13",
     "typescript": "3.6.3"
   },
@@ -53,5 +54,16 @@
       "**/__tests__/*.+(ts|tsx|js)"
     ],
     "preset": "ts-jest"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix \"./**/*[^d].ts\"",
+      "git add"
+    ]
   }
 }
