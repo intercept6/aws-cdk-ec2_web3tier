@@ -36,7 +36,7 @@
     "@aws-cdk/core": "1.8.0",
     "aws-cdk": "1.8.0",
     "npm": "6.11.3",
-    "source-map-support": "0.5.13",
+    "source-map-support": "0.5.19",
     "typescript": "3.6.3"
   },
   "jest": {
